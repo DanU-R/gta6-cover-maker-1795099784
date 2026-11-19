@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VISE/SIX - Cover Art Maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<main class="app">
+  <!-- ============ controls ============ -->
+  <section class="panel" id="panel">
+    <div class="brand">
+      <div class="mark">V6</div>
+      <div>
+        <h1>Vise/Six</h1>
+        <div class="tag">Cover Art Maker</div>
+      </div>
+    </div>
+    <p class="sub">Photo &rarr; neon sunset poster &rarr; PNG. 100% offline.</p>
+
+    <!-- photo -->
+    <div class="group">
+      <div class="lab"><span>Photo</span><b id="photoName">demo</b></div>
+      <div class="drop" id="drop">
+        <div class="big">Drop a photo</div>
+        <div class="sm">or click to browse &middot; JPG / PNG / WEBP</div>
+        <input id="photo" type="file" accept="image/*">
+      </div>
+      <div class="samples" id="samples"></div>
+      <div class="row" style="margin-top:10px">
+        <div class="range-row" style="flex:1">
+          <span class="val" id="zoomVal" style="width:auto;margin-right:6px">zoom</span>
+          <input id="zoom" type="range" min="1" max="3" step="0.01" value="1">
+        </div>
+      </div>
+    </div>
+
+    <!-- layout -->
+    <div class="group">
+      <div class="lab"><span>Layout</span></div>
+      <div class="seg" id="panels">
+        <button data-panels="1" class="on">Single</button>
+        <button data-panels="2">2</button>
+        <button data-panels="3">Triptych</button>
+        <button data-panels="4">Grid 4</button>
+      </div>
+    </div>
+
+    <!-- grade -->
+    <div class="group">
+      <div class="lab"><span>Colour grade</span></div>
+      <div class="seg" id="grades">
+        <button data-grade="sunset" class="on">Sunset</button>
+        <button data-grade="neon">Neon Night</button>
+        <button data-grade="vice">Vice</button>
+      </div>
+      <div class="row" style="margin-top:10px">
+        <div class="range-row" style="flex:1">
+          <span class="val" style="width:auto;margin-right:6px">grade</span>
+          <input id="gradeAmt" type="range" min="0.15" max="1" step="0.01" value="0.62">
+        </div>
+      </div>
+      <label class="toggle" style="margin-top:10px">
+        <input type="checkbox" id="duotone">
+        <span class="track"></span>
+        <span style="font-size:12.5px;color:var(--muted)">Duotone / contrast boost</span>
+      </label>
+    </div>
+
+    <!-- caption -->
+    <div class="group">
+      <div class="lab"><span>Caption</span><b id="capCount">0</b></div>
+      <input id="caption" type="text" maxlength="48" value="Sunset Heist" spellcheck="false">
+      <div style="margin-top:10px">
+        <input id="subtitle" type="text" maxlength="60" value="A VICE CITY STORY" spellcheck="false" aria-label="subtitle">
+      </div>
+      <div class="swatch" id="swatch"></div>
+    </div>
+
+    <!-- actions -->
+    <div class="group">
+      <button class="btn btn-random" id="random">✦ Surprise me</button>
+      <div class="btn-row" style="margin-top:10px">
+        <div class="row">
+          <select id="size" style="flex:1;background:var(--bg2);color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:11px;font:600 13px var(--font);outline:none">
+            <option value="1080x1080">Square 1080 × 1080</option>
+            <option value="1080x1350">Portrait 1080 × 1350</option>
+            <option value="1200x630">Link 1200 × 630</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" id="export">⬇ Download PNG</button>
+      </div>
+      <p id="status" role="status" style="margin-top:10px;color:var(--muted);font-size:12px;text-align:center"></p>
+    </div>
+  </section>
+
+  <!-- ============ stage ============ -->
+  <section class="stage" id="stage">
+    <div class="stage-inner" id="stageInner">
+      <canvas id="view" width="1080" height="1080" aria-label="Live cover preview"></canvas>
+    </div>
+    <div class="stage-badge"><span class="dot"></span><span id="dimLabel">1080 × 1080</span></div>
+    <div class="hint" id="hint">Drag to reposition · scroll to zoom · changes are live</div>
+    <div class="credit">100% local &middot; your photos never leave this device</div>
+  </section>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
